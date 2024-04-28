@@ -7,7 +7,8 @@ from langchain.schema import(
 
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv(), override=True)
-
+import streamlit as st
+from streamlit_chat import message
 st.set_page_config(
     page_title='Your Custom Assistant',
     page_icon=":home"
@@ -26,4 +27,14 @@ with st.sidebar:
                 SystemMessage(content=system_message)
             )
 
-        # st.write(st.session)
+        # st.write(st.session_state.messages)
+
+    if user_prompt:
+        st.session_state.messages_append(
+            HumanMessage(content=user_prompt)
+        )
+        with st.spinner('Working on your request ... '):
+           response = chat(st.session_state.messages)
+        st.session_state.messages.append(AIMessage(content=response.content))
+
+st.session_state.messages
