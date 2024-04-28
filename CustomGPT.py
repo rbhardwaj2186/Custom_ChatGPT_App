@@ -22,7 +22,7 @@ with st.sidebar:
     system_message = st.text_input(label='System role')
     user_prompt = st.text_input(label='send a message')
     if system_message:
-        if not any(isistance(x, SystemMessage) for x in st.session_state.messages):
+        if not any(isinstance(x, SystemMessage) for x in st.session_state.messages):
             st.session_state.messages.append(
                 SystemMessage(content=system_message)
             )
