@@ -37,4 +37,10 @@ with st.sidebar:
            response = chat(st.session_state.messages)
         st.session_state.messages.append(AIMessage(content=response.content))
 
-st.session_state.messages
+# st.session_state.messages
+# message('this is catgpt', is_user=False)
+# message('this is the user', is_user=True)
+
+for i, msg in enumerate(st.session_state.messages[1:]):
+    if i % 2 == 0:
+        message(msg.content, is_user=True)
