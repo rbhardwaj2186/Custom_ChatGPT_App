@@ -41,10 +41,14 @@ with st.sidebar:
 # message('this is catgpt', is_user=False)
 # message('this is the user', is_user=True)
 
+if len(st.session_state.messages) >= 1:
+    if not isinstance(st.session_state.messages[0], SystemMessage):
+        st.session_state.messages.insert(0, SystemMessage(content=" You are helpful assistant"))
+
 for i, msg in enumerate(st.session_state.messages[1:]):
     if i % 2 == 0:
         message(msg.content, is_user=True, key=f'{i} + :emoji')
     else:
         message(msg.content, is_user=False, key=f'{i} + :kkj')
-        
+
 
